@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Chat Translator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- =====================================================
+       SCREEN 1: API KEY SETUP
+       Shown when no API key is saved yet.
+  ====================================================== -->
+  <div id="setupScreen" class="screen hidden">
+
+    <div class="setup-header">
+      <div class="setup-logo">🌐</div>
+      <h1>AI Chat Translator</h1>
+      <p class="setup-subtitle">One-time setup to get started</p>
+    </div>
+
+    <div class="setup-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          Go to <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Create a new API key and copy it</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Paste it below</div>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input
+        type="password"
+        id="apiKeyInput"
+        placeholder="sk-proj-..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button id="showKeyBtn" class="icon-btn" title="Show/hide key">👁</button>
+    </div>
+
+    <div id="setupError" class="error-msg hidden"></div>
+
+    <button id="saveKeyBtn" class="btn-primary">
+      Save & Start Translating
+    </button>
+
+    <p class="privacy-note">
+      🔒 Your key is stored only in your browser.<br>Never sent anywhere except OpenAI.
+    </p>
+
+  </div>
+
+  <!-- =====================================================
+       SCREEN 2: MAIN CONTROLS
+       Shown when API key is already saved.
+  ====================================================== -->
+  <div id="mainScreen" class="screen hidden">
+
+    <!-- Header -->
+    <div class="main-header">
+      <div class="header-left">
+        <span class="header-logo">🌐</span>
+        <div>
+          <h2>AI Translator</h2>
+          <span class="platform-tag" id="platformTag">—</span>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="Change API key">⚙️</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Main toggle -->
+    <div class="toggle-card" id="toggleCard">
+      <div class="toggle-info">
+        <span class="toggle-label">Translation</span>
+        <span class="toggle-status" id="statusText">OFF</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="enableToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Language selector -->
+    <div class="field-label">Translate messages into</div>
+    <div class="select-wrapper">
+      <select id="langSelect">
+        <option value="en">🇬🇧 English</option>
+        <option value="bn">🇧🇩 Bengali (Bangla)</option>
+        <option value="es">🇪🇸 Spanish</option>
+        <option value="fr">🇫🇷 French</option>
+        <option value="de">🇩🇪 German</option>
+        <option value="ar">🇸🇦 Arabic</option>
+        <option value="hi">🇮🇳 Hindi</option>
+        <option value="zh">🇨🇳 Chinese</option>
+        <option value="ja">🇯🇵 Japanese</option>
+        <option value="pt">🇧🇷 Portuguese</option>
+        <option value="ru">🇷🇺 Russian</option>
+        <option value="ko">🇰🇷 Korean</option>
+        <option value="tr">🇹🇷 Turkish</option>
+      </select>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Tip -->
+    <div class="tip">💡 Click any translated message to see the original</div>
+
+    <!-- Change key link -->
+    <div class="change-key-row">
+      <button id="changeKeyBtn" class="link-btn">Change API key</button>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       SCREEN 3: CHANGE API KEY
+       Shown when user clicks "Change API key"
+  ====================================================== -->
+  <div id="changeKeyScreen" class="screen hidden">
+
+    <div class="back-header">
+      <button id="backBtn" class="icon-btn">← Back</button>
+      <span class="back-title">Change API Key</span>
+    </div>
+
+    <div class="input-group" style="margin-top:16px">
+      <input
+        type="password"
+        id="newApiKeyInput"
+        placeholder="sk-proj-..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button id="showNewKeyBtn" class="icon-btn" title="Show/hide">👁</button>
+    </div>
+
+    <div id="changeKeyError" class="error-msg hidden"></div>
+
+    <button id="updateKeyBtn" class="btn-primary" style="margin-top:12px">
+      Update Key
+    </button>
+
+    <button id="removeKeyBtn" class="btn-danger" style="margin-top:8px">
+      Remove Key & Reset
+    </button>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
